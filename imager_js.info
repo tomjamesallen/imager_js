@@ -1,0 +1,8 @@
+name = Imager.js
+description = Drupal module utilising the BBC new's responsive image solution 'imager'. https://github.com/BBC-News/Imager.js/
+package = media
+core = 7.x
+dependencies[] = field
+dependencies[] = image
+dependencies[] = ctools
+dependencies[] = libraries

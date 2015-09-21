@@ -1,0 +1,270 @@
+<?php
+
+/**
+ * @file
+ * imager_js module provides alternative image formatter.
+ */
+
+/**
+ * Include function.
+ */
+function imager_js_include($file) {
+  ctools_include($file, 'imager_js');
+}
+
+/**
+ * Implements hook_permission().
+ */
+function imager_js_permission() {
+  return array(
+    'administer_imager_js' => array(
+      'title' => t('administer imager_js module settings'),
+    ),
+  );
+}
+
+/**
+ * Return an individual image style for a given width.
+ */
+function _imager_js_return_image_style($width) {
+  return array(
+    'label' => "imager_js scale {$width}",
+    'effects' => array(
+      array(
+        'name' => 'image_scale',
+        'data' => array('width' => $width, 'height' => '', 'upscale' => 0),
+        'weight' => 0,
+      ),
+    )
+  );
+}
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function imager_js_image_default_styles() {
+  
+  // Array of widths to create styles for.
+  $widths = array(
+    80, 160, 320, 640, 960, 1280, 1920, 2560
+  );
+
+  // Create empty styles array.
+  $styles = array();
+  
+  // Cycle widths and add image styles to styles array.
+  foreach ($widths as $width) {
+    $styles["imager_js_scale_{$width}"] = _imager_js_return_image_style($width);
+  }
+
+  // Return styles.
+  return $styles;
+}
+
+/**
+ * Implements hook_init().
+ */
+function imager_js_init() {
+
+  // Use libraries to load Imager.js plugin.
+  if (module_exists('libraries')) {
+    if ($imager_js_library_path = _imager_js_library_path()) {
+      drupal_add_js($imager_js_library_path);
+    }
+  }
+  else {
+    return;
+  }
+
+  // Get module path.
+  $m_p = drupal_get_path('module', 'imager_js');
+  
+  // Add custom imager.js extension.
+  drupal_add_js($m_p . '/js/Imager.useMultipleSrcs.js');
+
+  // Add js setup code.
+  drupal_add_js($m_p . '/js/imager-js-setup.js');
+  
+  // Add css.
+  drupal_add_css($m_p . '/css/imager-js.css');
+}
+
+/**
+ * Implements hook_theme().
+ */
+function imager_js_theme($existing, $type, $theme, $path) {
+  // Return array of theme functions.
+  return array(
+    'imager_js_placeholder' => array(
+      'variables' => array(),
+    ),
+    'imager_js_noscript_fallback' => array(
+      'variables' => array(),
+    ),
+    'imager_js_script' => array(
+      'variables' => array(),
+    ),
+    'imager_js_wrapper' => array(
+      'variables' => array(),
+    ),
+    'imager_js_master' => array(
+      'variables' => array(),
+    ),
+    'imager_js_formatter_settings_summary' => array(
+      'variables' => array(),
+      'template' => 'formatter_settings_summary',
+      'path' => $path . '/templates',
+    )
+  );
+}
+
+/**
+ * Gets the path to the Imager.js library.
+ *
+ * @return
+ *   The path to the js file, or FALSE if not found.
+ */
+function _imager_js_library_path() {
+  $imager_js_path = libraries_get_path('imager.js');
+  
+  // File paths within library.
+  $minified_path = '/dist/Imager.min.js';
+  $un_minified_path = '/Imager.js';
+  
+
+  if (!empty($imager_js_path)) {
+    // Attempt to use minified version of Imager.js plugin.
+    if (file_exists($imager_js_path . $minified_path)) {
+      $imager_js_path .= $minified_path;
+    }
+    // Otherwise use non-minified version if available.
+    elseif (file_exists($imager_js_path . $un_minified_path)) {
+      $imager_js_path .= $un_minified_path;
+    }
+    else {
+      $imager_js_path = FALSE;
+    }
+  }
+  else {
+    $imager_js_path = FALSE;
+  }
+
+  return $imager_js_path;
+}
+
+/**
+ * Return the formatter's default settings.
+ */
+function _imager_js_field_formatter_default_settings() {
+  $default_image_style_keys = array_keys(imager_js_image_default_styles());
+  $default_image_styles = array_combine($default_image_style_keys, $default_image_style_keys);
+
+  $settings = array(
+    'image_styles' => $default_image_styles,
+    'background_image_fallback' => array('imager_js_scale_80' => 'imager_js_scale_80'),
+    'noscript_fallback' => array('none' => 'none'),
+    'wrapper_element' => 'div',
+    'inline_script' => 1,
+    'set_intrinsic_ratio' => 1,
+    'image_size_multiplier' => '1'
+  );
+  return $settings;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function imager_js_field_formatter_info() {
+  $formatters = array(
+    'imager_js' => array(
+      'label' => t('Imager.js'),
+      'field types' => array('image'),
+      'description' => t('Image formatter for responsive, lazy-loading images'),
+      'settings' => _imager_js_field_formatter_default_settings()
+    ),
+  );
+  return $formatters;
+}
+
+/**
+ * Include file containing function for returning form.
+ */
+imager_js_include('create_field_formatter_settings_form');
+
+/**
+ * Create formatter settings form.
+ */
+function imager_js_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  // Get display and display settings.
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  return _imager_js_create_field_formatter_settings_form($settings);
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function imager_js_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $form = _imager_js_create_field_formatter_settings_form($settings);
+
+  return theme('imager_js_formatter_settings_summary', array('form' => $form));
+}
+
+/**
+ * Include file containing theme functions.
+ */
+imager_js_include('theme_functions');
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function imager_js_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  // Create empty elements array.
+  $elements = array();
+
+  // Cycle through items.
+  foreach ($items as $item) {
+    // For each item get the rendered element.
+    $elements[] = _imager_js_render_element($item, $display);
+  }
+
+  // Return the elements.
+  return $elements;
+}
+
+/**
+ * Render an individual element.
+ */
+function _imager_js_render_element($item, $display) {
+
+  // Create empty array for element.
+  $element = array();
+
+  $image_data = _imager_js_get_image_data($item, $display);
+
+  // Create empty array for rendered elements.
+  $image_data['rendered'] = array();
+
+  // Get the rendered output.
+  $image_data['rendered']['placeholder'] = theme('imager_js_placeholder', $image_data);
+  $image_data['rendered']['noscript_fallback'] = theme('imager_js_noscript_fallback', $image_data);
+  $image_data['rendered']['script'] = theme('imager_js_script', $image_data);
+
+  // Wrapper has to follow the above, as it needs to render both the placeholder
+  // and noscript fallback inside of the wrapper element.
+  $image_data['rendered']['wrapper'] = theme('imager_js_wrapper', $image_data);
+
+  // Set the markup property.
+  $element['#markup'] = theme('imager_js_master', $image_data);
+
+  return $element;
+}
+
+/**
+ * Include file for gathering image data.
+ */
+imager_js_include('get_image_data');

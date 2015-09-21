@@ -62,10 +62,9 @@ function imager_js_image_default_styles() {
 }
 
 /**
- * Implements hook_init().
+ * Implements hook_page_build().
  */
-function imager_js_init() {
-
+function imager_js_page_build(&$page) {
   // Use libraries to load Imager.js plugin.
   if (module_exists('libraries')) {
     if ($imager_js_library_path = _imager_js_library_path()) {

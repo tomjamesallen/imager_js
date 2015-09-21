@@ -28,8 +28,6 @@ function _imager_js_create_field_formatter_settings_form($settings) {
     $default_image_styles = array_combine($default_image_style_keys, $default_image_style_keys);
   }
 
-  $element = array();
-
   $form_element['image_styles'] = array(
     '#type'           => 'select',
     '#multiple'       => TRUE,

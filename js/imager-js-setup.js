@@ -1,6 +1,10 @@
+/**
+ * @file
+ * Handles loading of images and exposes external API.
+ */
 ;(function ($, window) {
 
-  // Handle the eventuality that Imager.js has not been correctly installed in 
+  // Handle the eventuality that Imager.js has not been correctly installed in
   // the libraries directory.
   if (typeof Imager !== 'function') {
     if (typeof console === 'object') {
@@ -8,8 +12,8 @@
       console.log(errorMessage);
     }
 
-    // We need to add an empty function and save it to Drupal.imagerJs.add so 
-    // that when Drupal.imagerJs.add() is called from the markup output by the 
+    // We need to add an empty function and save it to Drupal.imagerJs.add so
+    // that when Drupal.imagerJs.add() is called from the markup output by the
     // imager_js field formatter it doesn't error.
     Drupal.imagerJs = {
       add: function () {}
@@ -28,7 +32,7 @@
       image: image,
       imager: imager
     });
-    
+
     // Bind to image .load.
     $(image).load(function () {
       // Add image-loaded class to parent for styling use.
@@ -58,7 +62,7 @@
     }
   });
 
-  // Create behavior to scan for new images. 
+  // Create behavior to scan for new images.
   Drupal.behaviors.imagerJs = {
     attach: function (context, settings) {
       // Call Imager's .add() method to scan for new images.
@@ -67,20 +71,3 @@
   };
 
 })(jQuery, window);
-
-// Example use of events.
-/*
-;(function ($, window) {
-
-  $(document).ready(function () {
-    $(document).bind('drupalImagerJs.onImageReplaced', function (event) {
-      console.log(event);
-    });
-
-    $(document).bind('drupalImagerJs.onImageLoaded', function (event) {
-      console.log(event);
-    });
-  });
-
-})(jQuery, window);
-*/

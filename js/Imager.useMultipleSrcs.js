@@ -1,10 +1,12 @@
 /**
+ * @file
  * Add the option to read multiple file srcs for images of different sizes.
  */
+
 ;(function (window, document) {
 
+  // This is where we need to run the logic to determine the best source.
   var useMultipleSrcs = function (image) {
-    // This is where we need to run the logic to determine the best source.
 
     // Get the current instance.
     var imagerInstance = this;
@@ -37,7 +39,7 @@
 
         // Get just the width segment of the data attribute's key.
         var srcWidth = attr.replace(dataSrcPrefix, '');
-        
+
         // Return here if we can't get an integer from srcWidth.
         if (typeof parseInt(srcWidth) !== 'number') {
           return;
@@ -78,7 +80,9 @@
   };
 
   // Test for Imager function.
-  if (typeof window.Imager !== 'function') { return; }
+  if (typeof window.Imager !== 'function') {
+    return;
+  }
 
   window.Imager.prototype.multipleSrcs = useMultipleSrcs;
 

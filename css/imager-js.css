@@ -16,20 +16,3 @@
 .drupal-imager-js-wrapper.intrinsic-ratio img {
   position: absolute;
 }
-
-
-/* Background image - test only */
-.drupal-imager-js-wrapper {
-  /*background-image: url(http://uk.novationmusic.com/sites/default/files/styles/cta_scale_320/public/Calc%26NDF_Body-Image_0_0.png);*/
-}
-
-/* Fade in example css - copy css into theme */
-/*
-.drupal-imager-js-wrapper img {
-  opacity: 0;
-  transition: all 300ms ease;
-}
-.drupal-imager-js-wrapper.image-loaded img {
-  opacity: 1;
-}
-*/

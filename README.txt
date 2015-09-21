@@ -100,3 +100,14 @@ animations, such as fade-ins when an image loads.
       });
 
     })(jQuery, window);
+
+Css example.
+    /* Fade in example css - copy css into theme */
+    .drupal-imager-js-wrapper img {
+      opacity: 0;
+      transition: all 300ms ease;
+    }
+    .drupal-imager-js-wrapper.image-loaded img {
+      opacity: 1;
+    }
+

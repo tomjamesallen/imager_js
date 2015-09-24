@@ -8,6 +8,12 @@
   // This is where we need to run the logic to determine the best source.
   var useMultipleSrcs = function (image) {
 
+    // If image width is 0 then return the gif src as we don't want to load up
+    // and image.
+    if (image.clientWidth === 0) {
+      return this.gif.currentSrc;
+    }
+
     // Get the current instance.
     var imagerInstance = this;
 

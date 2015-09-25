@@ -1,10 +1,11 @@
+;
 /**
  * @file
  * Add the option to read multiple file srcs for images of different sizes.
  */
 
 /* global Imager */
-;(function (window, document) {
+(function (window, document) {
   'use strict';
 
   // Prefix to look for in dataset.

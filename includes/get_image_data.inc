@@ -2,7 +2,7 @@
 
 /**
  * @file
- * imager_js handles collecting image data.
+ * Handles collecting image data.
  */
 
 /**
@@ -116,10 +116,8 @@ function _imager_js_return_noscript_fallback_src($image_data) {
  *
  * @param string $uri
  *        The uri of the original file. Normally starts public://.
- *
  * @param array $image_styles
  *        Optional array of image styles.
- *
  * @return array
  *         Returns an array of srcs.
  */
@@ -142,15 +140,15 @@ function _imager_js_create_image_sources($uri, array $image_styles) {
 
     // Checks path for image style.
     $derivative_uri = image_style_path($style_name, $uri);
-    
+
     // Check for (and create) image style version of image.
     $image_exists = file_exists(image_style_path($style_name, $uri));
-    
+
     // Test for whether image exists.
     if (!$image_exists) {
       // If image doesn't already exist then create it.
       if (!image_style_create_derivative($style, $uri, $derivative_uri)) {
-        // If function returns false then we have an error, in which case we 
+        // If function returns false then we have an error, in which case we
         // should skip this loop.
         continue;
       }
@@ -185,7 +183,7 @@ function _imager_js_create_image_sources($uri, array $image_styles) {
     $images[$style_name] = array(
       'width' => $image_width,
       'src' => $file_src,
-      'style' => $style
+      'style' => $style,
     );
   }
 
@@ -219,12 +217,12 @@ function _imager_js_create_wrapper_attributes($image_data) {
     // If we have height and width then calculate the padding-bottom value and 
     // create the CSS rule and add it to the style attribute.
     if ($height && $width) {
-      $aspect = $height/$width;
-      $padding_bottom = ($aspect*100) . '%';
+      $aspect = $height / $width;
+      $padding_bottom = ($aspect * 100) . '%';
       $style = "padding-bottom:{$padding_bottom};";
 
-      // If we don't already have a style attribute create it, otherwise append to
-      // the existing style attribute.
+      // If we don't already have a style attribute create it, otherwise append
+      // to the existing style attribute.
       if (!isset($attributes['style'])) {
         $attributes['style'] = $style;
       }
@@ -259,7 +257,7 @@ function _imager_js_create_wrapper_attributes($image_data) {
     $image_size_multiplier = $settings['image_size_multiplier'];
 
     if ($image_size_multiplier) {
-      $width = floor($width/$image_size_multiplier);
+      $width = floor($width / $image_size_multiplier);
     }
 
     $attributes["data-src-{$width}"] = $src['src'];
@@ -308,4 +306,3 @@ function _imager_js_create_noscript_fallback_attributes($image_data) {
 
   return $attributes;
 }
-

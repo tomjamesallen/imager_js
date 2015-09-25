@@ -2,7 +2,7 @@
 
 /**
  * @file
- * imager_js module provides alternative image formatter.
+ * This module provides a responsive image formatter.
  */
 
 /**

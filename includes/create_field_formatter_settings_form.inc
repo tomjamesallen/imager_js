@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Handles rendering field formatter settings form.
+ */
+
+/**
  * Create field formatter settings form.
  */
 function _imager_js_create_field_formatter_settings_form($settings) {

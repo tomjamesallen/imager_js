@@ -2,7 +2,7 @@
 
 /**
  * @file
- * imager_js theme functions.
+ * Theme functions.
  */
 
 /**

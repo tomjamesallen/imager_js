@@ -65,7 +65,8 @@ tags are stripped from the output of views' ajax mode.
 
 ### Intrinsic ratio
 Sets image container to correct aspect ratio using the intrinsic ratio method. 
-This will add an inline style to the wrapper element with a padding-bottom value.
+This will add an inline style to the wrapper element with a padding-bottom
+value.
 
 ### Image size multiplier
 Base multiplier to increase the size of the images. This can be used to 
@@ -110,4 +111,3 @@ Css example.
     .drupal-imager-js-wrapper.image-loaded img {
       opacity: 1;
     }
-

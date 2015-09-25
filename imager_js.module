@@ -85,11 +85,11 @@ function imager_js_page_build(&$page) {
   setup js file will set up a dummy .add() method on the Drupal.imagerJs object,
   so as to catch any inline script calls of Drupal.imagerJs.add(). This will
   prevent any js errors.
-  */
+   */
 
   // Add js setup code.
   drupal_add_js($m_p . '/js/imager-js-setup.js');
-  
+
   // Add css.
   drupal_add_css($m_p . '/css/imager-js.css');
 }
@@ -126,16 +126,15 @@ function imager_js_theme($existing, $type, $theme, $path) {
 /**
  * Gets the path to the Imager.js library.
  *
- * @return
+ * @return string
  *   The path to the js file, or FALSE if not found.
  */
 function _imager_js_library_path() {
   $imager_js_path = libraries_get_path('imager.js');
-  
+
   // File paths within library.
   $minified_path = '/dist/Imager.min.js';
   $un_minified_path = '/Imager.js';
-  
 
   if (!empty($imager_js_path)) {
     // Attempt to use minified version of Imager.js plugin.
@@ -171,7 +170,7 @@ function _imager_js_field_formatter_default_settings() {
     'wrapper_element' => 'div',
     'inline_script' => 1,
     'set_intrinsic_ratio' => 1,
-    'image_size_multiplier' => '1'
+    'image_size_multiplier' => '1',
   );
   return $settings;
 }
@@ -185,7 +184,7 @@ function imager_js_field_formatter_info() {
       'label' => t('Imager.js'),
       'field types' => array('image'),
       'description' => t('Image formatter for responsive, lazy-loading images'),
-      'settings' => _imager_js_field_formatter_default_settings()
+      'settings' => _imager_js_field_formatter_default_settings(),
     ),
   );
   return $formatters;

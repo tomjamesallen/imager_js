@@ -119,7 +119,7 @@ function imager_js_theme($existing, $type, $theme, $path) {
       'variables' => array(),
       'template' => 'formatter_settings_summary',
       'path' => $path . '/templates',
-    )
+    ),
   );
 }
 

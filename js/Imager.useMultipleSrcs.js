@@ -1,10 +1,9 @@
-/* global Imager */
-
 /**
  * @file
  * Add the option to read multiple file srcs for images of different sizes.
  */
 
+/* global Imager */
 ;(function (window, document) {
   'use strict';
 

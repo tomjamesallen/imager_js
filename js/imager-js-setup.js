@@ -1,9 +1,9 @@
-/* global Imager */
-
 /**
  * @file
  * Handles loading of images and exposes external API.
  */
+
+/* global Imager */
 ;(function ($, window) {
   'use strict';
 

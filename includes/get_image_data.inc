@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * imager_js handles collecting image data.
+ */
+
+/**
  * Function to gather all of the image data required to render the image.
  *
  * Returns an array of data.
@@ -8,7 +13,7 @@
 function _imager_js_get_image_data($item, $display) {
   // Create empty image data array.
   $image_data = array();
-  
+
   // Save image settings/defaults to image data.
   $image_data['settings'] = _imager_js_process_settings($display);
 
@@ -79,8 +84,6 @@ function _imager_js_return_background_image_fallback_src($image_data) {
   foreach ($image_srcs as $image_src) {
     return $image_src['src'];
   }
-  
-  return;
 }
 
 /**
@@ -102,8 +105,6 @@ function _imager_js_return_noscript_fallback_src($image_data) {
   foreach ($image_srcs as $image_src) {
     return $image_src['src'];
   }
-  
-  return;
 }
 
 /**

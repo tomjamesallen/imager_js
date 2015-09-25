@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * imager_js theme functions.
+ */
+
+/**
  * Render the image placeholder element.
  */
 function theme_imager_js_placeholder($variables) {

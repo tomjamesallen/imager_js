@@ -117,13 +117,13 @@ function _imager_js_return_noscript_fallback_src($image_data) {
  * @param string $uri
  *        The uri of the original file. Normally starts public://.
  *
- * @param array  $image_styles
+ * @param array $image_styles
  *        Optional array of image styles.
  *
  * @return array
  *         Returns an array of srcs.
  */
-function _imager_js_create_image_sources($uri, $image_styles) {
+function _imager_js_create_image_sources($uri, array $image_styles) {
   $images = array();
 
   // Get image styles.

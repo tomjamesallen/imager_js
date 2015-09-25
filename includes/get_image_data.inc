@@ -76,11 +76,11 @@ function _imager_js_return_background_image_fallback_src($image_data) {
   // Get image uri and image styles to pass to _imager_js_create_image_sources()
   $uri = $image_data['item']['uri'];
   $image_styles = array($image_data['settings']['background_image_fallback']);
-    
+
   // Return the image srcs.
   $image_srcs = _imager_js_create_image_sources($uri, $image_styles);
 
-  // Cycle image srcs and return the first src. 
+  // Cycle image srcs and return the first src.
   foreach ($image_srcs as $image_src) {
     return $image_src['src'];
   }
@@ -97,11 +97,11 @@ function _imager_js_return_noscript_fallback_src($image_data) {
   // Get image uri and image styles to pass to _imager_js_create_image_sources()
   $uri = $image_data['item']['uri'];
   $image_styles = array($image_data['settings']['noscript_fallback']);
-    
+
   // Return the image srcs.
   $image_srcs = _imager_js_create_image_sources($uri, $image_styles);
 
-  // Cycle image srcs and return the first src. 
+  // Cycle image srcs and return the first src.
   foreach ($image_srcs as $image_src) {
     return $image_src['src'];
   }
@@ -109,15 +109,17 @@ function _imager_js_return_noscript_fallback_src($image_data) {
 
 /**
  * Get multiple image sources for an image uri.
+ *
  * Pass a uri and an array of image styles and this function
  * will create the required images and return an array of
  * their srcs.
- * @param  string $uri
- *         The uri of the original file. Normally starts public://
- * 
- * @param  array  $image_styles
- *         Optional array of image styles.
- * 
+ *
+ * @param string $uri
+ *        The uri of the original file. Normally starts public://.
+ *
+ * @param array  $image_styles
+ *        Optional array of image styles.
+ *
  * @return array
  *         Returns an array of srcs.
  */

@@ -3,12 +3,13 @@
  * Handles loading of images and exposes external API.
  */
 ;(function ($, window) {
+  'use strict';
 
   // Handle the eventuality that Imager.js has not been correctly installed in
   // the libraries directory.
   if (typeof Imager !== 'function') {
     if (typeof console === 'object') {
-      var errorMessage = "ERROR [imager_js]: Imager object not found. Please check that the Imager.js project has been downloaded from https://github.com/BBC-News/Imager.js/ and put in the libraries directory, with the directory name 'Imager.js'."
+      var errorMessage = "ERROR [imager_js]: Imager object not found. Please check that the Imager.js project has been downloaded from https://github.com/BBC-News/Imager.js/ and put in the libraries directory, with the directory name 'Imager.js'.";
       console.log(errorMessage);
     }
 
@@ -17,7 +18,7 @@
     // imager_js field formatter it doesn't error.
     Drupal.imagerJs = {
       add: function () {}
-    }
+    };
 
     // Return here to prevent any setup.
     return;
@@ -57,7 +58,9 @@
     onImagesReplaced: function (images) {
       // Bind individual events for each image.
       for (var id in images) {
-        forEachImageReplaced(images[id], this);
+        if (images.hasOwnProperty(id)) {
+          forEachImageReplaced(images[id], this);
+        }
       }
     }
   });

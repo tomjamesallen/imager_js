@@ -31,7 +31,7 @@
     return {
       srcWidth: srcWidth,
       value: value
-    }
+    };
   };
 
   // This is where we need to run the logic to determine the best source.
@@ -63,7 +63,7 @@
     // src-[width] attributes.
     for (var attr in imageParent.dataset) {
       if (!imageParent.dataset.hasOwnProperty(attr)) {
-        continue
+        continue;
       }
 
       // Get the src data.

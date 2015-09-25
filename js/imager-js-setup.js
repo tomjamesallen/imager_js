@@ -11,8 +11,8 @@
   // the libraries directory.
   if (typeof Imager !== 'function') {
     if (typeof console === 'object') {
-      // If we have the console object then print error. This error is for 
-      // the drupal developer's reference. This is a critical error for the 
+      // If we have the console object then print error. This error is for
+      // the drupal developer's reference. This is a critical error for the
       // imager_js module so seems acceptable to print to console.
       var errorMessage = "ERROR [imager_js]: Imager object not found. Please check that the Imager.js project has been downloaded from https://github.com/BBC-News/Imager.js/ and put in the libraries directory, with the directory name 'Imager.js'.";
       console.log(errorMessage);

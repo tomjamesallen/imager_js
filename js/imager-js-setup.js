@@ -1,11 +1,10 @@
-;
 /**
  * @file
  * Handles loading of images and exposes external API.
+ *
+ * global Imager
  */
-
-/* global Imager */
-(function ($, window) {
+;(function ($, window) {
   'use strict';
 
   // Handle the eventuality that Imager.js has not been correctly installed in

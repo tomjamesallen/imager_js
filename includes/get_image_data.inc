@@ -118,6 +118,7 @@ function _imager_js_return_noscript_fallback_src($image_data) {
  *        The uri of the original file. Normally starts public://.
  * @param array $image_styles
  *        Optional array of image styles.
+ *
  * @return array
  *         Returns an array of srcs.
  */
@@ -214,7 +215,7 @@ function _imager_js_create_wrapper_attributes($image_data) {
     $height = $image_data['item']['height'];
     $width = $image_data['item']['width'];
 
-    // If we have height and width then calculate the padding-bottom value and 
+    // If we have height and width then calculate the padding-bottom value and
     // create the CSS rule and add it to the style attribute.
     if ($height && $width) {
       $aspect = $height / $width;
@@ -247,7 +248,7 @@ function _imager_js_create_wrapper_attributes($image_data) {
       $attributes['style'] .= $style;
     }
   }
-  
+
   // Create data-src attributes.
   foreach ($image_data['srcs'] as $src) {
     // Get default width.

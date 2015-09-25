@@ -49,7 +49,7 @@ function _imager_js_create_field_formatter_settings_form($settings) {
     '#type'           => 'select',
     '#multiple'       => FALSE,
     '#title'          => t('Background image fallback'),
-    '#description'    => t('Renders a version of the image as a background image on the wrapper. This can be used as a fallback for devices that don\'t have js enabled, or can be used as a placeholder that will show before the full res image loads. Select an image style to use, or select none to disable.'),
+    '#description'    => t("Renders a version of the image as a background image on the wrapper. This can be used as a fallback for devices that don't have js enabled, or can be used as a placeholder that will show before the full res image loads. Select an image style to use, or select none to disable."),
     '#default_value'  => $settings['background_image_fallback'],
     '#options'        => $available_image_styles,
   );
@@ -77,7 +77,7 @@ function _imager_js_create_field_formatter_settings_form($settings) {
   $form_element['inline_script'] = array(
     '#type'           => 'checkbox',
     '#title'          => t('Inline script'),
-    '#description'    => t('Render script tags inline to trigger Imager\'s .add() method. Rendering script inline will mean that the .add() method is called as early as possible. If disabled the .add() method will be triggered on Drupal\'s behaviors attach. Should be disabled if scripts are moved to footer. Please note, inline script tags are stripped from the output of views\' ajax mode.'),
+    '#description'    => t("Render script tags inline to trigger Imager's .add() method. Rendering script inline will mean that the .add() method is called as early as possible. If disabled the .add() method will be triggered on Drupal's behaviors attach. Should be disabled if scripts are moved to footer. Please note, inline script tags are stripped from the output of views' ajax mode."),
     '#default_value'  => $settings['inline_script'],
   );
 

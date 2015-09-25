@@ -35,7 +35,7 @@ function _imager_js_return_image_style($width) {
         'data' => array('width' => $width, 'height' => '', 'upscale' => 0),
         'weight' => 0,
       ),
-    )
+    ),
   );
 }
 
@@ -43,15 +43,15 @@ function _imager_js_return_image_style($width) {
  * Implements hook_image_default_styles().
  */
 function imager_js_image_default_styles() {
-  
+
   // Array of widths to create styles for.
   $widths = array(
-    80, 160, 320, 640, 960, 1280, 1920, 2560
+    80, 160, 320, 640, 960, 1280, 1920, 2560,
   );
 
   // Create empty styles array.
   $styles = array();
-  
+
   // Cycle widths and add image styles to styles array.
   foreach ($widths as $width) {
     $styles["imager_js_scale_{$width}"] = _imager_js_return_image_style($width);
@@ -80,10 +80,12 @@ function imager_js_page_build(&$page) {
     }
   }
 
-  // If we don't have the plugin we should add the css setup js files anyway
-  // as the setup js file will set up a dummy .add() method on the
-  // Drupal.imagerJs object, so as to catch any inline script calls of
-  // Drupal.imagerJs.add(). This will prevent any js errors.
+  /**
+   * If we don't have the plugin we should add the css setup js files anyway as
+   * the setup js file will set up a dummy .add() method on the Drupal.imagerJs
+   * object, so as to catch any inline script calls of Drupal.imagerJs.add().
+   * This will prevent any js errors.
+   */
 
   // Add js setup code.
   drupal_add_js($m_p . '/js/imager-js-setup.js');

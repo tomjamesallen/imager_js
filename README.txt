@@ -111,3 +111,14 @@ Css example.
     .drupal-imager-js-wrapper.image-loaded img {
       opacity: 1;
     }
+
+Reference
+---------
+A large amount of the PHP work in this module is based on an earlier project
+[Contextually Aware Images](https://www.drupal.org/sandbox/tomjamesallen/2165501),
+which I have been using on a number of sites for some years now. It works well,
+but was due some TLC, especially in the JS department. The PHP has been
+refactored for this project and in addition I have traded the custom CTA Images
+JS plugin for the BBC new team's Imager.js. This seems like a robust foundation;
+it is well tested and well used, and offers similar functionality to the CTA
+Images plugin.

@@ -3,7 +3,7 @@
  * Handles loading of images and exposes external API.
  */
 
-/* global Imager */
+/* global BackgroundImager */
 ;(function ($, window) {
   'use strict';
 
@@ -25,7 +25,7 @@
     });
   };
 
-  // Create instance of Imager.
+  // Create instance of BackgroundImager.
   Drupal.bgImagerJs = BackgroundImager('.drupal-bg-imager-js', {
     imageReadyClass: 'image-loaded',
 

@@ -300,12 +300,24 @@ function _imager_js_render_element($item, $display) {
   // Check that we have the required plugin, if not return here.
   $set_plugin = $image_data['settings']['plugin'];
   if ($set_plugin === 'no-plugin') {
+    $message = 'Plugin not set';
+    $variables = array();
+    
+    if (isset($display['views_view']->name)) {
+      $message .= ' for @view';
+      $variables['@view'] = $display['views_view']->name;
+    }
+
+    watchdog('imager_js', $message, $variables, WATCHDOG_WARNING);
     return;
   }
 
   $available_plugins = variable_get('imager_js_available_plugins');
 
   if (!in_array($set_plugin, $available_plugins)) {
+    $message = 'Plugin @plugin not installed.';
+    $variables['@plugin'] = $set_plugin;
+    watchdog('imager_js', $message, $variables, WATCHDOG_WARNING);
     return;
   }
 

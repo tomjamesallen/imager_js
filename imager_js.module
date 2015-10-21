@@ -90,7 +90,7 @@ function imager_js_page_build(&$page) {
     }
 
     // Check if we have background-imager.js plugin.
-    if ($bg_imager_js_library_path = _background_imager_js_library_path()) {
+    if ($bg_imager_js_library_path = _imager_js_bg_imager_library_path()) {
       // Add background-imager.js plugin.
       drupal_add_js($bg_imager_js_library_path);
 
@@ -175,7 +175,7 @@ function _imager_js_library_path() {
  * @return string
  *   The path to the js file, or FALSE if not found.
  */
-function _background_imager_js_library_path() {
+function _imager_js_bg_imager_library_path() {
   $bg_imager_js_path = libraries_get_path('background-imager.js');
 
   // File paths within library.
@@ -217,7 +217,7 @@ function _imager_js_field_formatter_default_settings() {
     'inline_script' => 1,
     'set_intrinsic_ratio' => 1,
     'image_size_multiplier' => '1',
-    'plugin' => 'imager.js'
+    'plugin' => 'imager.js',
   );
   return $settings;
 }
@@ -302,7 +302,7 @@ function _imager_js_render_element($item, $display) {
   if ($set_plugin === 'no-plugin') {
     $message = 'Plugin not set';
     $variables = array();
-    
+
     if (isset($display['views_view']->name)) {
       $message .= ' for @view';
       $variables['@view'] = $display['views_view']->name;

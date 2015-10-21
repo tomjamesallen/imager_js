@@ -209,7 +209,7 @@ function _imager_js_create_wrapper_attributes($image_data) {
   }
   if ($settings['plugin'] === 'background-imager.js') {
     $attributes['class'] .= 'drupal-bg-imager-js';
-  }  
+  }
 
   if ($settings['set_intrinsic_ratio']) {
     $attributes['class'] .= ' intrinsic-ratio';

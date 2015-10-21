@@ -52,7 +52,6 @@ function theme_imager_js_script($variables) {
       return '<script>Drupal.bgImagerJs.add();</script>';
     }
   }
-  return;
 }
 
 /**

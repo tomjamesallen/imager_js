@@ -201,8 +201,15 @@ function _imager_js_create_wrapper_attributes($image_data) {
   // Create empty attributes array.
   $attributes = array();
 
+  $attributes['class'] = '';
+
   // Add class.
-  $attributes['class'] = 'drupal-imager-js-wrapper';
+  if ($settings['plugin'] === 'imager.js') {
+    $attributes['class'] .= 'drupal-imager-js-wrapper';
+  }
+  if ($settings['plugin'] === 'background-imager.js') {
+    $attributes['class'] .= 'drupal-bg-imager-js';
+  }  
 
   if ($settings['set_intrinsic_ratio']) {
     $attributes['class'] .= ' intrinsic-ratio';

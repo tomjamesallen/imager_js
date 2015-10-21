@@ -68,6 +68,8 @@ function imager_js_page_build(&$page) {
   // Get module path.
   $m_p = drupal_get_path('module', 'imager_js');
 
+  $available_plugins = [];
+
   // Use libraries to load Imager.js plugin.
   if (module_exists('libraries')) {
     // Check if we have Imager.js plugin.
@@ -83,6 +85,8 @@ function imager_js_page_build(&$page) {
 
       // Add css.
       drupal_add_css($m_p . '/css/imager-js.css');
+
+      $available_plugins[] = 'imager.js';
     }
 
     // Check if we have background-imager.js plugin.
@@ -95,7 +99,11 @@ function imager_js_page_build(&$page) {
 
       // Add css.
       drupal_add_css($m_p . '/css/background-imager-js.css');
+
+      $available_plugins[] = 'background-imager.js';
     }
+
+    variable_set('imager_js_available_plugins', $available_plugins);
   }
 }
 
@@ -209,6 +217,7 @@ function _imager_js_field_formatter_default_settings() {
     'inline_script' => 1,
     'set_intrinsic_ratio' => 1,
     'image_size_multiplier' => '1',
+    'plugin' => 'imager.js'
   );
   return $settings;
 }
@@ -287,6 +296,18 @@ function _imager_js_render_element($item, $display) {
   $element = array();
 
   $image_data = _imager_js_get_image_data($item, $display);
+
+  // Check that we have the required plugin, if not return here.
+  $set_plugin = $image_data['settings']['plugin'];
+  if ($set_plugin === 'no-plugin') {
+    return;
+  }
+
+  $available_plugins = variable_get('imager_js_available_plugins');
+
+  if (!in_array($set_plugin, $available_plugins)) {
+    return;
+  }
 
   // Create empty array for rendered elements.
   $image_data['rendered'] = array();

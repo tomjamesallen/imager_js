@@ -10,6 +10,31 @@
  */
 function _imager_js_create_field_formatter_settings_form($settings) {
 
+  $default_settings = _imager_js_field_formatter_default_settings();
+
+  $available_plugins = variable_get('imager_js_available_plugins');
+  $available_plugins = array_combine($available_plugins, $available_plugins);
+
+  if (isset($settings['plugin'])) {
+    $default_plugin = $settings['plugin'];
+  }
+  else {
+    $default_plugin = $default_settings['plugin'];
+  }
+
+  if (count($available_plugins) === 0) {
+    $available_plugins['no-plugin'] = '-- Please install a js plugin --';
+  }
+
+  $form_element['plugin'] = array(
+    '#type'           => 'select',
+    '#multiple'       => FALSE,
+    '#title'          => t('JS plugin'),
+    '#description'    => t('The js plugin to use.'),
+    '#default_value'  => $default_plugin,
+    '#options'        => $available_plugins,
+  );
+
   // Get the available image styles.
   $available_image_styles = array();
   foreach (image_styles() as $image_style) {

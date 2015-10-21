@@ -36,7 +36,7 @@
   });
 
   // Create behavior to scan for new images.
-  Drupal.behaviors.imagerJs = {
+  Drupal.behaviors.bgImagerJs = {
     attach: function (context, settings) {
       // Call BackgroundImager's .add() method to scan for new images.
       Drupal.bgImagerJs.add();

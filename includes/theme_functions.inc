@@ -9,6 +9,11 @@
  * Render the image placeholder element.
  */
 function theme_imager_js_placeholder($variables) {
+  // If we are using the background-imager.js plugin we do not need a js
+  // placeholder.
+  if ($variables['settings']['plugin'] === 'background-imager.js') {
+    return '';
+  }
   // Set default elem to div.
   $elem = 'div';
 
@@ -40,11 +45,14 @@ function theme_imager_js_noscript_fallback($variables) {
  */
 function theme_imager_js_script($variables) {
   if ($variables['settings']['inline_script']) {
-    return '<script>Drupal.imagerJs.add();</script>';
+    if ($variables['settings']['plugin'] === 'imager.js') {
+      return '<script>Drupal.imagerJs.add();</script>';
+    }
+    if ($variables['settings']['plugin'] === 'background-imager.js') {
+      return '<script>Drupal.bgImagerJs.add();</script>';
+    }
   }
-  else {
-    return;
-  }
+  return;
 }
 
 /**

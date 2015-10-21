@@ -7,3 +7,9 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.drupal-bg-imager-js .drupal-imager-js-noscript-img {
+  display: block;
+  position: absolute;
+  max-width: 100%;
+  height: auto;
+}

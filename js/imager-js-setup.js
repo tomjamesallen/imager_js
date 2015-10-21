@@ -7,28 +7,6 @@
 ;(function ($, window) {
   'use strict';
 
-  // Handle the eventuality that Imager.js has not been correctly installed in
-  // the libraries directory.
-  if (typeof Imager !== 'function') {
-    if (typeof console === 'object') {
-      // If we have the console object then print error. This error is for
-      // the drupal developer's reference. This is a critical error for the
-      // imager_js module so seems acceptable to print to console.
-      var errorMessage = "ERROR [imager_js]: Imager object not found. Please check that the Imager.js project has been downloaded from https://github.com/BBC-News/Imager.js/ and put in the libraries directory, with the directory name 'Imager.js'.";
-      console.log(errorMessage);
-    }
-
-    // We need to add an empty function and save it to Drupal.imagerJs.add so
-    // that when Drupal.imagerJs.add() is called from the markup output by the
-    // imager_js field formatter it doesn't error.
-    Drupal.imagerJs = {
-      add: function () {}
-    };
-
-    // Return here to prevent any setup.
-    return;
-  }
-
   // Setup event triggering for image replace and then image load for each
   // image.
   var forEachImageReplaced = function (image, imager) {

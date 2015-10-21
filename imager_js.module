@@ -77,21 +77,26 @@ function imager_js_page_build(&$page) {
 
       // Add custom imager.js extension.
       drupal_add_js($m_p . '/js/Imager.useMultipleSrcs.js');
+
+      // Add js setup code.
+      drupal_add_js($m_p . '/js/imager-js-setup.js');
+
+      // Add css.
+      drupal_add_css($m_p . '/css/imager-js.css');
+    }
+
+    // Check if we have background-imager.js plugin.
+    if ($bg_imager_js_library_path = _background_imager_js_library_path()) {
+      // Add background-imager.js plugin.
+      drupal_add_js($bg_imager_js_library_path);
+
+      // Add js setup code.
+      drupal_add_js($m_p . '/js/background-imager-js-setup.js');
+
+      // Add css.
+      drupal_add_css($m_p . '/css/background-imager-js.css');
     }
   }
-
-  /*
-  If we don't have the plugin we should add the css setup js files anyway as the
-  setup js file will set up a dummy .add() method on the Drupal.imagerJs object,
-  so as to catch any inline script calls of Drupal.imagerJs.add(). This will
-  prevent any js errors.
-   */
-
-  // Add js setup code.
-  drupal_add_js($m_p . '/js/imager-js-setup.js');
-
-  // Add css.
-  drupal_add_css($m_p . '/css/imager-js.css');
 }
 
 /**
@@ -154,6 +159,39 @@ function _imager_js_library_path() {
   }
 
   return $imager_js_path;
+}
+
+/**
+ * Gets the path to the BackgroundImager.js library.
+ *
+ * @return string
+ *   The path to the js file, or FALSE if not found.
+ */
+function _background_imager_js_library_path() {
+  $bg_imager_js_path = libraries_get_path('background-imager.js');
+
+  // File paths within library.
+  $minified_path = '/dist/background-imager.min.js';
+  $un_minified_path = '/background-imager.js';
+
+  if (!empty($bg_imager_js_path)) {
+    // Attempt to use minified version of Imager.js plugin.
+    if (file_exists($bg_imager_js_path . $minified_path)) {
+      $bg_imager_js_path .= $minified_path;
+    }
+    // Otherwise use non-minified version if available.
+    elseif (file_exists($bg_imager_js_path . $un_minified_path)) {
+      $bg_imager_js_path .= $un_minified_path;
+    }
+    else {
+      $bg_imager_js_path = FALSE;
+    }
+  }
+  else {
+    $bg_imager_js_path = FALSE;
+  }
+
+  return $bg_imager_js_path;
 }
 
 /**

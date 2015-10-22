@@ -304,7 +304,7 @@ function _imager_js_create_noscript_fallback_attributes($image_data) {
   // Add a class so that the image can be styled differently if necessary.
   $attributes['class'] = 'drupal-imager-js-noscript-img';
 
-  // Data-alt, is transferred to the image element as the alt tag.
+  // Alt.
   $attributes['alt'] = $image_data['item']['alt'];
 
   // Add image src to attributes.

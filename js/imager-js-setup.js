@@ -33,6 +33,10 @@
 
   // Create instance of Imager.
   Drupal.imagerJs = new Imager('.drupal-imager-js', {
+    // Lazyload setup.
+    lazyload: true,
+    lazyloadOffset: 0,
+
     // Enable multipleSrcs.
     availableWidths: function (image) {
       return this.multipleSrcs(image);

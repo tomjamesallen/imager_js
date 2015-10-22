@@ -68,7 +68,7 @@ function imager_js_page_build(&$page) {
   // Get module path.
   $m_p = drupal_get_path('module', 'imager_js');
 
-  $available_plugins = [];
+  $available_plugins = array();
 
   // Use libraries to load Imager.js plugin.
   if (module_exists('libraries')) {

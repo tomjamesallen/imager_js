@@ -215,17 +215,26 @@ function _imager_js_create_wrapper_attributes($image_data) {
     $attributes['class'] .= ' intrinsic-ratio';
   }
 
+  // Get aspect ratio.
+  // Get height and width values.
+  $height = $image_data['item']['height'];
+  $width = $image_data['item']['width'];
+  if ($height && $width) {
+    $aspect = $height / $width;
+
+    // If we have aspect ratio set data attribute.
+    $attributes['data-aspect'] = $aspect;
+  }
+
+  // Set aspect ratio data attribute.
+  //
   // If intrinsic ratio is set then add style attribute with padding bottom
   // value.
   if ($settings['set_intrinsic_ratio']) {
-    // Get height and width values.
-    $height = $image_data['item']['height'];
-    $width = $image_data['item']['width'];
 
     // If we have height and width then calculate the padding-bottom value and
     // create the CSS rule and add it to the style attribute.
-    if ($height && $width) {
-      $aspect = $height / $width;
+    if (isset($aspect)) {
       $padding_bottom = ($aspect * 100) . '%';
       $style = "padding-bottom:{$padding_bottom};";
 

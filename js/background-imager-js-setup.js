@@ -40,6 +40,9 @@
     attach: function (context, settings) {
       // Call BackgroundImager's .add() method to scan for new images.
       Drupal.bgImagerJs.add();
+      // Call BackgroundImager's .update() method to check sizing for existing
+      // images.
+      Drupal.bgImagerJs.update();
     }
   };
 

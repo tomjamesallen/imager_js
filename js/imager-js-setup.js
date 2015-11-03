@@ -57,6 +57,9 @@
     attach: function (context, settings) {
       // Call Imager's .add() method to scan for new images.
       Drupal.imagerJs.add();
+      // Call imager.js's .checkImagesNeedReplacing() method to check sizing for
+      // existing images.
+      Drupal.imagerJs.checkImagesNeedReplacing(Drupal.imagerJs.divs);
     }
   };
 
